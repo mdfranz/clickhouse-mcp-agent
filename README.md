@@ -29,3 +29,4 @@ uv run --with mcp-clickhouse mcp-clickhouse
 # References
 - https://github.com/ClickHouse/mcp-clickhouse
 - https://clickhouse.com/blog/integrating-clickhouse-mcp
+- https://www.youtube.com/watch?v=rvkOpKhPWvQ

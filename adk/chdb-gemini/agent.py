@@ -1,5 +1,4 @@
 from google.adk.agents import Agent
-from google.adk.models.lite_llm import LiteLlm
 from google.adk.tools.mcp_tool.mcp_toolset import (
     MCPToolset,
     StreamableHTTPConnectionParams,
@@ -10,10 +9,9 @@ tools = MCPToolset(
 )
 
 root_agent = Agent(
-    name="dumb",
-    model=LiteLlm(model='openai/gpt-5-mini'),
+    name="chdb_gemini",
+    model="gemini-2.5-pro",
     tools=[tools],
     description="Clickhouse Instructions",
-    instruction="""Create the necessary clickhouse query using the Tools to be able to query ClickHouse dat """
+    instruction="""Create the necessary clickhouse query using the Tools to be able to query ClickHouse compressed JSON data""",
 )
-

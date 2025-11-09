@@ -8,8 +8,8 @@ This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickh
 # Example Prompt
 
 - Using file('/tmp/mcp/data/**/*.log.gz', 'JSONEachRow') as a data source you will find JSON compressed files for multiple events captured from Linux systems.
-- Find and count the different type of events based on event_type. 
-- Then find the number number of SSH logins based on the auth event_type. 
+- Find and count the different type of events based on event_type.
+- Then find the number number of SSH logins based on the auth event_type.
 - Lastly find the number of unique users that logged in via SSH and the source IPs they logged in as.
 
 
@@ -27,6 +27,14 @@ export CLICKHOUSE_MCP_SERVER_TRANSPORT=http
 ```
 uv run --with mcp-clickhouse mcp-clickhouse
 ```
+
+# Other environment
+
+LiteLLM uses `OLLAMA_API_BASE`
+```
+export OLLAMA_API_BASE=$OLLAMA_HOST
+```
+
 
 # References
 - https://github.com/ClickHouse/mcp-clickhouse

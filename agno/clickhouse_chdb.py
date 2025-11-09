@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
-import asyncio, sys, time
+import asyncio
+import sys
+import time
 
 from agno.agent import Agent
 from agno.models.anthropic import Claude
-from agno.models.ollama import Ollama
 from agno.models.google import Gemini
+from agno.models.ollama import Ollama
 from agno.models.openai import OpenAIChat
 from agno.tools.mcp import MCPTools
 
@@ -52,7 +54,10 @@ if __name__ == "__main__":
     model = sys.argv[1]
     print(f"Selected {model}")
     time.sleep(3)
-    prompt = """Using file('/tmp/mcp/data/**/*.log.gz', 'JSONEachRow') as a data source you will find JSON compressed files.
-    Find and count the different type of events based on event_type. Then find the number number of SSH logins based on the auth event_type. Lastly find the number of unique users that logged in via SSH
-        """
+    prompt = """
+    - Using file('/tmp/mcp/data/**/*.log.gz', 'JSONEachRow') as a data source you will find JSON compressed files for multiple events captured from Linux systems.
+    - Find and count the different type of events based on event_type.
+    - Then find the number number of SSH logins based on the auth event_type.
+    - Lastly find the number of unique users that logged in via SSH and the source IPs they logged in as.
+    """
     asyncio.run(main(prompt, model))

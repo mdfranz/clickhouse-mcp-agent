@@ -12,3 +12,7 @@ export CLICKHOUSE_MCP_SERVER_TRANSPORT=http
 ```
 uv run --with mcp-clickhouse mcp-clickhouse
 ```
+
+# References
+- https://github.com/ClickHouse/mcp-clickhouse
+- https://clickhouse.com/blog/integrating-clickhouse-mcp

@@ -1,0 +1,8 @@
+agno
+ollama
+openai
+pyarrow
+pandas
+google-genai
+anthropic
+mcp

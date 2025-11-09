@@ -1,3 +1,8 @@
+# What is this
+
+This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickhouse) with both [Agno](https://docs.agno.com/introduction) and [Google ADK](https://google.github.io/adk-docs/)
+
+
 # Example Prompt
 
 - Using file('/tmp/mcp/data/**/*.log.gz', 'JSONEachRow') as a data source you will find JSON compressed files for multiple events captured from Linux systems.

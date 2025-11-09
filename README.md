@@ -1,3 +1,5 @@
+![ADK](clickhouse-adk.png)
+
 # What is this
 
 This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickhouse) with both [Agno](https://docs.agno.com/introduction) and [Google ADK](https://google.github.io/adk-docs/)

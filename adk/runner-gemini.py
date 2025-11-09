@@ -102,6 +102,16 @@ class ClickHouseAgentRunner:
 
         logger.debug(f"Initialized ClickHouseAgentRunner with model: {self.model_id}")
 
+    async def cleanup(self) -> None:
+        """Clean up resources properly."""
+        logger.debug("Cleaning up agent runner resources...")
+        try:
+            # Close MCP toolset connections if available
+            if hasattr(self.tools, "close"):
+                await self.tools.close()
+        except Exception as e:
+            logger.debug(f"Error during cleanup: {e}")
+
     async def create_session(self) -> Session:
         """Creates a new asynchronous session.
 
@@ -135,6 +145,7 @@ class ClickHouseAgentRunner:
         logger.debug(f"User query: {prompt}")
         logger.info(f"\n** User: {prompt}\n")
 
+        response_stream = None
         try:
             response_stream = self.runner.run_async(
                 new_message=types.Content(role="user", parts=[types.Part(text=prompt)]),
@@ -157,10 +168,11 @@ class ClickHouseAgentRunner:
             raise
         finally:
             # Ensure proper cleanup of the stream
-            try:
-                await response_stream.aclose()
-            except Exception as e:
-                logger.warning(f"Error closing response stream: {e}")
+            if response_stream is not None:
+                try:
+                    await response_stream.aclose()
+                except Exception as e:
+                    logger.debug(f"Error closing response stream: {e}")
 
 
 def resolve_model_id(model_name: str) -> str:
@@ -191,6 +203,7 @@ async def main(args: argparse.Namespace) -> None:
     Args:
         args: Command line arguments.
     """
+    agent_runner = None
     try:
         # Resolve model ID
         model_id = resolve_model_id(args.model)
@@ -229,6 +242,10 @@ async def main(args: argparse.Namespace) -> None:
     except Exception as e:
         logger.error(f"Fatal error in main: {e}")
         sys.exit(1)
+    finally:
+        # Clean up resources
+        if agent_runner is not None:
+            await agent_runner.cleanup()
 
 
 def parse_args() -> argparse.Namespace:

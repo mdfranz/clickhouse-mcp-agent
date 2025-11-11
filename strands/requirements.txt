@@ -1,0 +1,5 @@
+strands-agents
+strands-agents[gemini]
+strands-agents[ollama]
+strands-agents[openai]
+strands-agents-tools

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 import logging
 import os
 import sys
@@ -47,26 +50,30 @@ if __name__ == "__main__":
             streaming=False,
         )
 
-    streamable_http_mcp_client = MCPClient(
-        lambda: streamablehttp_client("http://localhost:8000/mcp")
-    )
+    mcp_url = os.getenv("MCP_URL", "http://localhost:8000/mcp")
+    streamable_http_mcp_client = MCPClient(lambda: streamablehttp_client(mcp_url))
 
     # Manual approach
-    with streamable_http_mcp_client:
-        tools = streamable_http_mcp_client.list_tools_sync()
-        agent = Agent(tools=tools, system_prompt=instructions, model=agent_model)
+    try:
+        with streamable_http_mcp_client:
+            tools = streamable_http_mcp_client.list_tools_sync()
+            agent = Agent(tools=tools, system_prompt=instructions, model=agent_model)
 
-        logging.debug("Running first query...")
-        result = agent(
-            "Count the number of different types of events based on the the event_type field"
-        )
-        print(result)
-        logging.debug(f"First result: {result}")
+            logging.debug("Running first query...")
+            result = agent(
+                "Count the number of different types of events based on the the event_type field"
+            )
+            print(result)
+            logging.debug(f"First result: {result}")
 
-        logging.debug("Running second query...")
-        result = agent(
-            "Now find the number number of SSH logins based on the auth event_type."
-            "Lastly find the number of unique users that logged in via SSH and the source IPs they logged in from."
-        )
-        print(result)
-        logging.debug(f"Second result: {result}")
+            logging.debug("Running second query...")
+            result = agent(
+                "Now find the number number of SSH logins based on the auth event_type."
+                "Lastly find the number of unique users that logged in via SSH and the source IPs they logged in from."
+            )
+            print(result)
+            logging.debug(f"Second result: {result}")
+    except Exception as e:
+        print(f"Failed to connect to MCP server at {mcp_url}: {e}", file=sys.stderr)
+        logging.error(f"Failed to connect to MCP server at {mcp_url}: {e}")
+        sys.exit(1)

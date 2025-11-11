@@ -15,13 +15,14 @@ This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickh
 
 # Running a standalone MCP server
 
-Set environment variables
+Set environment variables, this listens on all interfaces obviously
 
 ```
 export CLICKHOUSE_ENABLED=false
 export CHDB_DATA_PATH=data
 export CHDB_ENABLED=true
 export CLICKHOUSE_MCP_SERVER_TRANSPORT=http
+export CLICKHOUSE_MCP_BIND_HOST=0.0.0.0
 ```
 
 ```

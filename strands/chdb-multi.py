@@ -6,6 +6,7 @@ import os
 import sys
 
 from mcp.client.streamable_http import streamablehttp_client
+from strands.models.anthropic import AnthropicModel
 from strands.models.gemini import GeminiModel
 from strands.models.ollama import OllamaModel
 from strands.models.openai import OpenAIModel
@@ -42,8 +43,15 @@ if __name__ == "__main__":
         agent_model = OpenAIModel(
             client_args={"api_key": os.environ["OPENAI_API_KEY"]}, model_id=raw_model
         )
+    elif raw_model.find("claude") > -1:
+        agent_model = AnthropicModel(
+            client_args={"api_key": os.environ["ANTHROPIC_API_KEY"]},
+            model_id=raw_model,
+            max_tokens=1028,
+        )
+
+    # Otherwise pick Ollama
     else:
-        # Assume Ollama
         agent_model = OllamaModel(
             host=f"http://{os.environ['OLLAMA_HOST']}",
             model_id=raw_model,
@@ -74,6 +82,5 @@ if __name__ == "__main__":
             print(result)
             logging.debug(f"Second result: {result}")
     except Exception as e:
-        print(f"Failed to connect to MCP server at {mcp_url}: {e}", file=sys.stderr)
-        logging.error(f"Failed to connect to MCP server at {mcp_url}: {e}")
+        print(f"Error {e}", file=sys.stderr)
         sys.exit(1)

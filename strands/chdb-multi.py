@@ -33,6 +33,7 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     raw_model = sys.argv[1]
+    print(f"Using {raw_model}")
     logging.debug(f"Using model: {raw_model}")
 
     if raw_model.find("gemini") > -1:
@@ -53,10 +54,12 @@ if __name__ == "__main__":
     # Otherwise pick Ollama
     else:
         agent_model = OllamaModel(
-            host=f"http://{os.environ['OLLAMA_HOST']}",
+            host=f"{os.environ['OLLAMA_HOST']}",
             model_id=raw_model,
             streaming=False,
         )
+
+        print(f"OLLAMA_HOST: {os.environ['OLLAMA_HOST']}")
 
     mcp_url = os.getenv("MCP_URL", "http://localhost:8000/mcp")
     streamable_http_mcp_client = MCPClient(lambda: streamablehttp_client(mcp_url))

@@ -21,7 +21,10 @@ logging.info("Starting agent...")
 class ChdbAgent:
     def __init__(self, model_name: str):
         logging.info(f"Initializing ChdbAgent with model: {model_name}")
-        self.server = MCPServerStreamableHTTP("http://localhost:8000/mcp")
+
+        self.server = MCPServerStreamableHTTP(
+            os.getenv("MCP_URL", "http://localhost:8000/mcp")
+        )
         logging.info("MCP Server initialized.")
 
         self.agent = Agent(

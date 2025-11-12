@@ -33,7 +33,7 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     raw_model = sys.argv[1]
-    print(f"Using {raw_model}")
+    print(f"======= Using {raw_model}")
     logging.debug(f"Using model: {raw_model}")
 
     if raw_model.find("gemini") > -1:
@@ -61,11 +61,11 @@ if __name__ == "__main__":
 
         print(f"OLLAMA_HOST: {os.environ['OLLAMA_HOST']}")
 
-    mcp_url = os.getenv("MCP_URL", "http://localhost:8000/mcp")
-    streamable_http_mcp_client = MCPClient(lambda: streamablehttp_client(mcp_url))
-
     # Manual approach
     try:
+        mcp_url = os.getenv("MCP_URL", "http://localhost:8000/mcp")
+        streamable_http_mcp_client = MCPClient(lambda: streamablehttp_client(mcp_url))
+
         with streamable_http_mcp_client:
             tools = streamable_http_mcp_client.list_tools_sync()
             agent = Agent(tools=tools, system_prompt=instructions, model=agent_model)
@@ -84,6 +84,9 @@ if __name__ == "__main__":
             )
             print(result)
             logging.debug(f"Second result: {result}")
+    except KeyboardInterrupt:
+        print("\nProcess interrupted.", file=sys.stderr)
+        sys.exit(0)
     except Exception as e:
         print(f"Error {e}", file=sys.stderr)
         sys.exit(1)

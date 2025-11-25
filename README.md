@@ -2,7 +2,7 @@
 
 # What is this
 
-This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickhouse) with both [Agno](https://docs.agno.com/introduction) and [Google ADK](https://google.github.io/adk-docs/)
+This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickhouse) and [MotherDuck DuckDB MCP Server](https://github.com/motherduckdb/mcp-server-motherduck) with both [Agno](https://docs.agno.com/introduction) and [Google ADK](https://google.github.io/adk-docs/)
 
 
 # Example Prompt
@@ -12,8 +12,14 @@ This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickh
 - Then find the number number of SSH logins based on the auth event_type.
 - Lastly find the number of unique users that logged in via SSH and the source IPs they logged in as.
 
+# Running standalone DuckDB MCP Server
 
-# Running a standalone MCP server
+```
+uvx mcp-server-motherduck --db-path ./vector.db --transport sse --port 8000
+```
+
+
+# Running a standalone ClickHouse MCP server
 
 Set environment variables, this listens on all interfaces obviously
 

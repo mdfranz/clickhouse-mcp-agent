@@ -6,7 +6,6 @@ import sys
 
 from pydantic_ai import Agent
 from pydantic_ai.mcp import MCPServerStreamableHTTP
-from pydantic_ai.mcp import MCPServerSSE
 from pydantic_ai.providers.ollama import OllamaProvider
 
 # Configure logging
@@ -23,8 +22,8 @@ class DuckDBAgent:
     def __init__(self, model_name: str):
         logging.info(f"Initializing DuckDBAgent with model: {model_name}")
 
-        self.server = MCPServerSSE(
-            os.getenv("MCP_URL", "http://127.0.0.1:8000/sse"),max_retries=5
+        self.server = MCPServerStreamableHTTP(
+            os.getenv("MCP_URL", "http://127.0.0.1:8000/mcp"), max_retries=5
         )
         logging.info("MCP Server initialized.")
 
@@ -68,19 +67,15 @@ if __name__ == "__main__":
     print(result.usage())
 
     result = duckdb_agent_instance.run_query(
-         "Describe and count the different types of event sources, for each event source pick the most important fields"
-         "These fields should be based on real SQL queries and sampling data."
+        "Describe and count the different types of event sources, for each event source pick the most important fields"
+        "These fields should be based on real SQL queries and sampling data."
     )
     print(result.output)
     print(result.usage())
-
 
     result = duckdb_agent_instance.run_query(
-         "Now find the number number of SSH logins based on the auth event_type."
-         "Lastly find the number of unique users that logged in via SSH and the source IPs they logged in from."
+        "Now find the number number of SSH logins based on the auth event_type."
+        "Lastly find the number of unique users that logged in via SSH and the source IPs they logged in from."
     )
     print(result.output)
     print(result.usage())
-
-
-

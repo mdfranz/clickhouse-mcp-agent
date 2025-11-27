@@ -51,6 +51,7 @@ if __name__ == "__main__":
         print("Example: foo.py claude")
         print("Supported models: claude, gemini, gpt-*, ollama_model_name")
         sys.exit(1)
+
     model = sys.argv[1]
     print(f"Selected {model}")
     time.sleep(3)
@@ -60,6 +61,6 @@ if __name__ == "__main__":
         if prompt.lower() in ["quit", "exit"]:
             print("Exiting.")
             break
-        print("-" * 50) # Separator for readability
+        print("-" * 50)  # Separator for readability
         asyncio.run(main(prompt, model))
-        print("-" * 50) # Separator for readability
+        print("-" * 50)  # Separator for readability

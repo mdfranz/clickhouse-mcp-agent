@@ -23,8 +23,8 @@ from agno.tools.mcp import MCPTools
 
 async def main(data_question, model):
     async with MCPTools(
-        transport="sse",
-        url="http://127.0.0.1:8989/sse",
+        transport="streamable-http",
+        url="http://127.0.0.1:8000/mcp",
         timeout_seconds=60,
     ) as mcp_tools:
         if model == "claude":

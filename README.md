@@ -15,7 +15,24 @@ This is testing [ClickHouse MCP Server](https://github.com/ClickHouse/mcp-clickh
 # Running standalone DuckDB MCP Server
 
 ```
-uvx mcp-server-motherduck --db-path ./vector.db --transport sse --port 8000
+mfranz@t490:~/tmp/duckdb-mcp$ uvx mcp-server-motherduck --db-path ./vector.db --transport stream --port 8000
+[motherduck] INFO - 🦆 MotherDuck MCP Server v0.8.0
+[motherduck] INFO - Ready to execute SQL queries via DuckDB/MotherDuck
+[motherduck] INFO - Query result limits: 1024 rows, 50,000 characters
+[motherduck] INFO - Query timeout: disabled
+[motherduck] INFO - Starting MotherDuck MCP Server
+[motherduck] INFO - Database client initialized in `duckdb` mode
+[motherduck] INFO - 🔌 Connecting to duckdb database
+[motherduck] INFO - ✅ Successfully connected to duckdb database
+[motherduck] INFO - Registering handlers
+[motherduck] INFO - MCP server initialized in http-streamable mode
+[motherduck] INFO - 🦆 Connect to MotherDuck MCP Server at http://127.0.0.1:8000/mcp
+[uvicorn]    INFO - Started server process [759779]
+[uvicorn]    INFO - Waiting for application startup.
+[motherduck] INFO - StreamableHTTP session manager started
+[motherduck] INFO - MCP server started with StreamableHTTP session manager
+[uvicorn]    INFO - Application startup complete.
+[uvicorn]    INFO - Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ```
 
 

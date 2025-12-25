@@ -64,6 +64,7 @@ Based on DNS lookups to `security.ubuntu.com`, the following 25 IP addresses hav
 *   192.168.4.174
 RunUsage(input_tokens=13602, cache_read_tokens=5994, output_tokens=1100, details={'thoughts_tokens': 461, 'text_prompt_tokens': 13602, 'cached_content_tokens': 5994, 'text_cache_tokens': 5994}, requests=7, tool_calls=6)
 DuckDB Query (or 'exit'/'quit'): find the top 10 most common DNS queries from 192.168.2.100
+```
 
 The top 10 most common DNS queries from the IP address **192.168.2.100** are as follows:
 

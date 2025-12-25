@@ -31,9 +31,8 @@ class ChdbAgent:
             model_name,
             toolsets=[self.server],
             instructions=(
-                "Using file('/tmp/mcp/data/**/*.log.gz', 'JSONEachRow') as a data source you"
-                " will find JSON compressed files for multiple events captured from Linux systems"
-                " by creating ClickHouse SQL queries using the ClickHouse MCP Server. Only show me the results not the queries themselves."
+                "Using file('./**/*.log.gz', 'JSONEachRow') as a data source you will find JSON compressed files for multiple events captured from Linux systems"
+                "by creating ClickHouse SQL queries using the ClickHouse MCP Server. Only show me the results not the queries themselves."
             ),
         )
         logging.info("Pydantic AI Agent created.")

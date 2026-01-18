@@ -1,0 +1,1 @@
+Find all the SSH connection attempts to port 22 and find any relevant DNS queries that correspond to that SSH login

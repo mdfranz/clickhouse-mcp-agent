@@ -1,0 +1,1 @@
+Using DNS, TLS, and QUIC event types identify all source IPs that may be communicating with AWS Cloud resources. Explain why each SOURCE IP was confirmed as communicating with AWS.

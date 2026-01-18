@@ -39,7 +39,7 @@ def init_sqlite_db() -> SqliteDb:
 
 async def main(model_name: str) -> None:
     sqlite_db = init_sqlite_db()
-    
+
     mcp_url = os.getenv("MCP_URL", "http://127.0.0.1:8000/mcp")
     logger.info(f"Connecting to MCP at {mcp_url}...")
 
@@ -68,14 +68,14 @@ async def main(model_name: str) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="DuckDB CLI Agent")
     parser.add_argument(
-        "model", 
+        "model",
         help="Model to use (claude, gemini, gpt-*, ollama_model_name)",
-        nargs="?", # Make it optional to allow showing help easily, though logic requires it
-        default=None
+        nargs="?",  # Make it optional to allow showing help easily, though logic requires it
+        default=None,
     )
-    
+
     args = parser.parse_args()
-    
+
     if not args.model:
         parser.print_help()
         sys.exit(1)
